@@ -1,5 +1,5 @@
-import './src/config/ReactotronConfig';
-import './src/config/DevtoolsConfig';
+import '~/config/ReactotronConfig';
+import '~/config/DevtoolsConfig';
 
 import { AppRegistry } from 'react-native';
 import App from './src';
