@@ -7,8 +7,11 @@ import reducers from './reducers';
 // REDUX-SAGA
 import sagas from './sagas';
 
+// REACTOTRON CONFIG for REDUX SAGA
+const sagaMonitor = __DEV__ ? console.tron.createSagaMonitor() : null;
+
 // MIDDLEWARES
-const sagaMiddleware = createSagaMiddleware();
+const sagaMiddleware = createSagaMiddleware({ sagaMonitor });
 const middlewares = [sagaMiddleware]; // To add new middlewares use middlewares.push()
 
 // REACTOTRON CONFIG + CREATE STORE
