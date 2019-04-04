@@ -1,17 +1,31 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { View, Text } from 'react-native';
+import { View, Text, Button } from 'react-native';
 
-const TodoList = ({ todos }) => (
+const TodoList = ({ todos, dispatch }) => (
   <View
     style={{
-      flex: 1, backgroundColor: '#FFF', justifyContent: 'center', alignItems: 'center',
+      flex: 1,
+      backgroundColor: '#FFF',
+      justifyContent: 'center',
+      alignItems: 'center',
     }}
   >
-    {todos.map((todo, index) => (
-      <Text key={index}>{todo}</Text>
+    {todos.map(todo => (
+      <Text
+        onPress={() => dispatch({ type: 'MARK_COMPLETED', id: todo.id })}
+        style={{ textDecorationLine: todo.completed ? 'line-through' : 'none' }}
+        key={todo.id}
+      >
+        {todo.text}
+      </Text>
     ))}
+
+    <Button
+      onPress={() => dispatch({ type: 'ADD_TODO', text: 'Novo ToDo' })}
+      title="Adicionar ToDo"
+    />
   </View>
 );
 
