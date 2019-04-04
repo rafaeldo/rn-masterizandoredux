@@ -1,11 +1,42 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as reposActions from '~/store/actions/repositories';
 
-import { View } from 'react-native';
+import { ActivityIndicator, Text } from 'react-native';
+import { Container } from './styles';
 
-// import { Container } from './styles';
+class Repositories extends Component {
+  componentDidMount() {
+    const { loadRepos } = this.props;
 
-export default class Repositories extends Component {
+    loadRepos();
+  }
+
   render() {
-    return <View />;
+    const { repositories } = this.props;
+
+    return (
+      <Container>
+        {repositories.loading ? (
+          <ActivityIndicator size="small" color="#999" />
+        ) : (
+          repositories.data.map(repo => <Text key={repo.id}>{repo.name}</Text>)
+        )}
+      </Container>
+    );
   }
 }
+
+// MAP STATE and ACTIONS
+const mapStateToProps = state => ({
+  repositories: state.repositories,
+});
+
+const mapActionsToProps = dispatch => bindActionCreators(reposActions, dispatch);
+//
+
+export default connect(
+  mapStateToProps,
+  mapActionsToProps,
+)(Repositories);
