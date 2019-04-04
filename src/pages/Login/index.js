@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as loginActions from '~/store/actions/login';
+import { Creators as loginActions } from '~/store/ducks/login';
+
+import { ActivityIndicator } from 'react-native';
 
 import {
   Container, Input, Button, ButtonText, Error,
 } from './styles';
-
-import { ActivityIndicator } from 'react-native';
 
 class Login extends Component {
   state = {

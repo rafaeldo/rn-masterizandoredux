@@ -6,9 +6,9 @@ import {
 } from 'redux-saga/effects';
 
 // LOGIN ACTIONS
-import * as loginActions from '~/store/actions/login';
+import { Creators as loginActions, Types as LoginTypes } from '~/store/ducks/login';
 // REPOS ACTIONS
-import * as reposActions from '~/store/actions/repositories';
+import { Creators as reposActions, Types as ReposTypes } from '~/store/ducks/repositories';
 
 // CALLBACKS (async)
 // --- Login
@@ -43,7 +43,7 @@ function* loadRepos() {
 // SAGA CONFIG
 export default function* rootSaga() {
   return yield all([
-    takeLatest('LOGIN_REQUEST', login),
-    takeLatest('REPO_REQUEST', loadRepos),
+    takeLatest(LoginTypes.REQUEST, login),
+    takeLatest(ReposTypes.REQUEST, loadRepos),
   ]);
 }

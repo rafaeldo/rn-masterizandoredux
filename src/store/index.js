@@ -2,7 +2,7 @@ import { createStore, compose, applyMiddleware } from 'redux';
 
 // REDUCERS
 import createSagaMiddleware from 'redux-saga';
-import reducers from './reducers';
+import ducks from './ducks';
 
 // REDUX-SAGA
 import sagas from './sagas';
@@ -17,13 +17,13 @@ const middlewares = [sagaMiddleware]; // To add new middlewares use middlewares.
 // REACTOTRON CONFIG + CREATE STORE
 const store = __DEV__
   ? createStore(
-    reducers,
+    ducks,
     compose(
       console.tron.createEnhancer(),
       applyMiddleware(...middlewares),
     ),
   )
-  : createStore(reducers, compose(applyMiddleware(...middlewares)));
+  : createStore(ducks, compose(applyMiddleware(...middlewares)));
 
 // ACTIVATE SAGA MIDDLEWARE
 sagaMiddleware.run(sagas);
