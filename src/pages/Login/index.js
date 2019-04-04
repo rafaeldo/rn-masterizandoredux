@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as loginActions from '~/store/actions/login';
 
-import api from '~/services/api';
-
 import {
   Container, Input, Button, ButtonText, Error,
 } from './styles';
+
+import { ActivityIndicator } from 'react-native';
 
 class Login extends Component {
   state = {
@@ -16,21 +16,14 @@ class Login extends Component {
 
   handleSubmit = async () => {
     const { username } = this.state;
-    const { loginSuccess, loginFailure, navigation } = this.props;
+    const { loginRequest } = this.props;
 
-    try {
-      await api.get(`/users/${username}`);
-
-      loginSuccess(username);
-      navigation.navigate('Repositories');
-    } catch (err) {
-      loginFailure();
-    }
+    loginRequest(username);
   };
 
   render() {
     const { username } = this.state;
-    const { error } = this.props;
+    const { error, loading } = this.props;
 
     return (
       <Container>
@@ -44,7 +37,7 @@ class Login extends Component {
           onChangeText={text => this.setState({ username: text })}
         />
         <Button onPress={this.handleSubmit}>
-          <ButtonText>Entrar</ButtonText>
+          { loading ? <ActivityIndicator size="small" color="#FFF" /> : <ButtonText>Entrar</ButtonText> }
         </Button>
       </Container>
     );
@@ -54,6 +47,7 @@ class Login extends Component {
 // MAP STATE and ACTIONS
 const mapStateToProps = state => ({
   error: state.login.error,
+  loading: state.login.loading,
 });
 
 const mapActionsToProps = dispatch => bindActionCreators(loginActions, dispatch);
