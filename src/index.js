@@ -4,9 +4,14 @@ import store from './store';
 
 import Routes from './routes';
 
+// Creates a Navigation Service
+// objective: to use react-navigation elsewhere in the App.
+import { setNavigator } from './services/navigation';
+//
+
 const App = () => (
   <Provider store={store}>
-    <Routes />
+    <Routes ref={setNavigator} />
   </Provider>
 );
 

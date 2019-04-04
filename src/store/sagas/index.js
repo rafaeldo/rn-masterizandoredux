@@ -1,4 +1,5 @@
 import api from '~/services/api';
+import { navigate } from '~/services/navigation';
 
 import {
   all, takeLatest, call, put,
@@ -15,7 +16,8 @@ function* login(action) {
     yield call(api.get, `/users/${username}`);
 
     yield put(loginActions.loginSuccess(username));
-    // navigation.navigate('Repositories');
+
+    navigate('Repositories');
   } catch (err) {
     yield put(loginActions.loginFailure());
   }
