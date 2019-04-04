@@ -1,10 +1,12 @@
 import { createStore, compose, applyMiddleware } from 'redux';
 
-// REDUCERS
+// REDUX-SAGA
 import createSagaMiddleware from 'redux-saga';
+
+// REDUCERS
 import ducks from './ducks';
 
-// REDUX-SAGA
+// SAGAS
 import sagas from './sagas';
 
 // REACTOTRON CONFIG for REDUX SAGA
