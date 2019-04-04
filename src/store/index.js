@@ -1,10 +1,10 @@
 import { createStore, compose } from 'redux';
 
-import todosReducer from './reducers/todos';
+import loginReducer from './reducers/login';
 
 // REACTOTRON CONFIG
 const store = __DEV__
-  ? createStore(todosReducer, compose(console.tron.createEnhancer()))
+  ? createStore(loginReducer, compose(console.tron.createEnhancer()))
   : createStore;
 
 export default store;
